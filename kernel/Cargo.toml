@@ -1,0 +1,12 @@
+[package]
+name = "kernel"
+version = "0.1.0"
+authors = ["Ittoh Kimura <kimura.itto.kd3@gmail.com>"]
+
+[dependencies]
+
+[lib]
+crate-type = ["staticlib"]
+
+[profile.dev]
+panic = "abort"
