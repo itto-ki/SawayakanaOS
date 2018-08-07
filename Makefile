@@ -10,6 +10,7 @@ LD_FLAG := -m elf_i386 -n
 # Directories
 BOOT_DIR := boot
 KERNEL_DIR := kernel
+KERNEL_SRC_DIR := $(KERNEL_DIR)/src
 KERNEL_BUILD_DIR := $(KERNEL_DIR)/target/$(CUSTOM_TARGET)/debug
 LD_DIR := ldscript
 BUILD_DIR := build
@@ -18,7 +19,7 @@ ISO_FILES := $(BUILD_DIR)/isofiles
 # Files
 LOADER_SRCS := $(wildcard $(BOOT_DIR)/*.S)
 LOADER_OBJS := $(patsubst %.S, %.o, $(LOADER_SRCS))
-KERNEL_SRCS := $(KERNEL_DIR)/src/lib.rs
+KERNEL_SRCS := $(KERNEL_SRC_DIR)/*.rs $(KERNEL_SRC_DIR)/drivers/*.rs
 KERNEL_OBJS := $(KERNEL_BUILD_DIR)/libkernel.a
 LD_SCRIPT := $(LD_DIR)/linker.ld
 GRUB_CFG := grub.cfg

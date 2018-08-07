@@ -1,6 +1,10 @@
 #![feature(panic_implementation)]
 #![no_std]
 
+
+mod drivers;
+
+use drivers::vga::VGA_BUFFER;
 use core::panic::PanicInfo;
 
 #[panic_implementation]
@@ -11,14 +15,10 @@ pub extern "C" fn panic(_info: &PanicInfo) -> ! {
 
 #[no_mangle]
 pub extern fn kernel_main() -> ! {
-    let vga_buffer = 0xb8000 as *mut u8;
 
-    let hello: &[u8] = b"SawayakanaAsa";
-    for (i, &byte) in hello.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0x0b;
-        }
+    unsafe {
+        VGA_BUFFER.write_str("SawayakanaAsa");
+        VGA_BUFFER.flush();
     }
 
     loop {}
