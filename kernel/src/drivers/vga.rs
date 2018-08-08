@@ -11,6 +11,7 @@ pub static mut VGA_BUFFER: VGABuffer = VGABuffer {
     y_pos: 0,
 };
 
+#[allow(dead_code)]
 pub enum ColorCode {
     Black = 0x0,
     Blue = 0x1,
