@@ -3,6 +3,8 @@
 
 
 mod drivers;
+#[macro_use]
+mod printk;
 
 use drivers::vga::VGA_BUFFER;
 use core::panic::PanicInfo;
@@ -16,10 +18,8 @@ pub extern "C" fn panic(_info: &PanicInfo) -> ! {
 #[no_mangle]
 pub extern fn kernel_main() -> ! {
 
-    unsafe {
-        VGA_BUFFER.write_str("SawayakanaAsa");
-        VGA_BUFFER.flush();
-    }
-
+    printk!("Sawayakana{}", "Asa");
+    printk!("Hello {}", "World");
+    printk!("{} + {} = {}", 1, 2, 3);
     loop {}
 }

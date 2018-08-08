@@ -1,3 +1,5 @@
+use core::fmt;
+
 const VGA_BUFFER_WIDTH: usize = 80;
 const VGA_BUFFER_HIGHT: usize = 25;
 
@@ -117,5 +119,20 @@ impl VGABuffer {
         }
         self.x_pos = 0;
         self.y_pos = 0;
+    }
+
+    pub fn print(&mut self, args: fmt::Arguments) -> () {
+        use core::fmt::Write;
+        self.write_fmt(args).unwrap();
+        self.flush();
+    }
+}
+
+impl fmt::Write for VGABuffer {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        for byte in s.bytes() {
+            self.write_byte(byte)
+        }
+        Ok(())
     }
 }
