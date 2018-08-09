@@ -62,19 +62,17 @@ impl VGABuffer {
 
     pub fn new_line(&mut self) -> () {
         if self.y_pos < VGA_BUFFER_HIGHT - 1 {
-            self.x_pos = 0;
             self.y_pos += 1;
         } else {
             for y in 1..VGA_BUFFER_HIGHT {
-                for x in 0..VGA_BUFFER_WIDTH {
-                    self.buffer[y-1][x] = self.buffer[y][x];
-                    if y == VGA_BUFFER_HIGHT - 1 {
-                        self.buffer[y][x] = VGACharacter::new(b' ', ColorCode::Black, ColorCode::Black);
-                    }
+                self.buffer[y-1] = self.buffer[y];
+                if y == VGA_BUFFER_HIGHT - 1 {
+                    self.buffer[y] =
+                        [VGACharacter::new(b' ', ColorCode::Black, ColorCode::Black); VGA_BUFFER_WIDTH];
                 }
             }
-            self.x_pos = 0;
         }
+        self.x_pos = 0;
     }
 
     pub fn write_byte(&mut self, byte: u8) -> () {
@@ -113,9 +111,8 @@ impl VGABuffer {
 
     pub fn clear(&mut self) -> () {
         for y in 0..VGA_BUFFER_HIGHT {
-            for x in 0..VGA_BUFFER_WIDTH {
-                self.buffer[y][x] = VGACharacter::new(b' ', ColorCode::Black, ColorCode::Black);
-            }
+            self.buffer[y] =
+                [VGACharacter::new(b' ', ColorCode::Black, ColorCode::Black); VGA_BUFFER_WIDTH];
         }
         self.x_pos = 0;
         self.y_pos = 0;
