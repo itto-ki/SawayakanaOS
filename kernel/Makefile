@@ -8,14 +8,15 @@ DEBUG_BUILD_DIR :=  $(TARGET_DIR)/$(CUSTOM_TARGET)/debug/
 
 # Files
 SRCS := $(SRC_DIR)/*.rs $(SRC_DIR)/drivers/*.rs
+CUSTOM_TARGET_FILE := $(CUSTOM_TARGET).json
 
 # COMMAND
-XARGO_FLAG := --target $(CUSTOM_TARGET)
+CARGO_FLAG := --target $(CUSTOM_TARGET_FILE)
 
 .PHONY: build clean
 
 build: $(SRCS)
-	xargo build $(XARGO_FLAG)
+	cargo xbuild $(CARGO_FLAG)
 
 clean:
 	rm -rf $(TARGET_DIR)
