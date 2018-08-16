@@ -5,6 +5,6 @@ Simple operating system like a linux
 * GRUB
 * NASM
 * Rust (nightly ver.)
-* Xargo
+* cargo-xbuild
 * QEMU
 * binutils
