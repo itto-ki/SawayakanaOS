@@ -9,7 +9,7 @@ mod printk;
 use drivers::vga::VGA_BUFFER;
 use core::panic::PanicInfo;
 
-#[panic_implementation]
+#[panic_handler]
 #[no_mangle]
 pub extern "C" fn panic(_info: &PanicInfo) -> ! {
     loop {}
