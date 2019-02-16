@@ -1,7 +1,7 @@
 macro_rules! print {
     ($($arg:tt)*) => ({
         unsafe {
-            VGA_BUFFER.print(format_args!($($arg)*));
+            drivers::vga::VGA_BUFFER.print(format_args!($($arg)*));
         }
     });
 }

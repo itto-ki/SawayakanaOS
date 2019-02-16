@@ -4,7 +4,6 @@ mod drivers;
 #[macro_use]
 mod printk;
 
-use drivers::vga::VGA_BUFFER;
 use core::panic::PanicInfo;
 
 #[panic_handler]
@@ -14,10 +13,12 @@ pub extern "C" fn panic(_info: &PanicInfo) -> ! {
 }
 
 #[no_mangle]
-pub extern fn kernel_main() -> ! {
+pub extern fn kernel_main(magic: u64, addr: u64) -> ! {
 
     printk!("Sawayakana{}", "Asa");
     printk!("Hello {}", "World");
     printk!("{} + {} = {}", 1, 2, 3);
+    printk!("Magic = 0x{:x}", magic);
+    printk!("Addr  = 0x{:x}", addr);
     loop {}
 }
