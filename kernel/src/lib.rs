@@ -1,6 +1,4 @@
-#![feature(panic_implementation)]
 #![no_std]
-
 
 mod drivers;
 #[macro_use]
